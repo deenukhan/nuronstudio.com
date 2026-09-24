@@ -4,25 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nuron Studio — Coming Soon</title>
-  <meta name="description" content="Nuron Studio is arriving. A house of considered design, motion and intelligence. Leave your name for the first invitation." />
+  <meta name="description" content="Nuron Studio is coming soon." />
   <meta name="theme-color" content="#070707" />
   <meta property="og:title" content="Nuron Studio — Coming Soon" />
-  <meta property="og:description" content="Something exquisite is being composed. Leave your name for the first invitation." />
+  <meta property="og:description" content="Nuron Studio is coming soon." />
   <meta property="og:type" content="website" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23070707' stroke='%23c9a96e' stroke-width='1.5'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='Georgia,serif' font-size='30' fill='%23c9a96e'%3EN%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Jost:wght@300&display=swap" rel="stylesheet" />
 
   <style>
     :root {
       --ink: #070707;
-      --ink-2: #0d0c0b;
       --gold: #c9a96e;
       --gold-bright: #e9d3a3;
-      --gold-dim: rgba(201, 169, 110, 0.35);
       --ivory: #f3ecdf;
-      --ivory-dim: rgba(243, 236, 223, 0.55);
+      --ivory-dim: rgba(243, 236, 223, 0.5);
       --serif: 'Cormorant Garamond', 'Times New Roman', serif;
       --sans: 'Jost', 'Helvetica Neue', Arial, sans-serif;
       --ease: cubic-bezier(0.19, 1, 0.22, 1);
@@ -33,612 +31,123 @@
     html, body { height: 100%; }
 
     body {
-      background: var(--ink);
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 50%, rgba(201, 169, 110, 0.07), transparent 70%),
+        var(--ink);
       color: var(--ivory);
       font-family: var(--sans);
       font-weight: 300;
-      overflow-x: hidden;
-      overflow-y: auto;
       -webkit-font-smoothing: antialiased;
-      cursor: none;
-      scrollbar-width: none;
-    }
-    body::-webkit-scrollbar { display: none; }
-
-    @media (hover: none), (pointer: coarse) {
-      body { cursor: auto; }
-      .cursor, .cursor-ring { display: none !important; }
     }
 
-    /* ---------- Atmosphere ---------- */
-    .atmosphere {
-      position: fixed; inset: 0; z-index: 0; pointer-events: none;
-      background:
-        radial-gradient(ellipse 70% 55% at 50% 45%, rgba(201, 169, 110, 0.10), transparent 70%),
-        radial-gradient(ellipse 45% 40% at 15% 85%, rgba(120, 80, 40, 0.10), transparent 70%),
-        radial-gradient(ellipse 40% 35% at 85% 15%, rgba(160, 120, 70, 0.08), transparent 70%),
-        var(--ink);
-    }
-
-    .aurora {
-      position: absolute; inset: -20%;
-      filter: blur(90px);
-      opacity: 0.55;
-      mix-blend-mode: screen;
-    }
-    .aurora span {
-      position: absolute; border-radius: 50%;
-      width: 55vmax; height: 55vmax;
-      background: radial-gradient(circle, rgba(201,169,110,0.22), transparent 60%);
-      animation: drift 28s ease-in-out infinite alternate;
-    }
-    .aurora span:nth-child(2) {
-      width: 45vmax; height: 45vmax; left: 55%; top: 40%;
-      background: radial-gradient(circle, rgba(140, 95, 45, 0.20), transparent 60%);
-      animation-duration: 36s; animation-delay: -12s;
-    }
-    .aurora span:nth-child(3) {
-      width: 35vmax; height: 35vmax; left: 10%; top: 60%;
-      background: radial-gradient(circle, rgba(233, 211, 163, 0.14), transparent 60%);
-      animation-duration: 44s; animation-delay: -25s;
-    }
-    @keyframes drift {
-      0%   { transform: translate(0, 0) scale(1); }
-      50%  { transform: translate(12vw, -8vh) scale(1.15); }
-      100% { transform: translate(-8vw, 10vh) scale(0.95); }
-    }
-
-    canvas#dust { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
-
-    .spotlight {
-      position: fixed; inset: 0; z-index: 2; pointer-events: none;
-      background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%),
-        rgba(233, 211, 163, 0.07), transparent 60%);
-      transition: background 0.15s linear;
-    }
-
-    .grain {
-      position: fixed; inset: 0; z-index: 30; pointer-events: none;
-      opacity: 0.07;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-      animation: grainShift 0.6s steps(2) infinite;
-    }
-    @keyframes grainShift {
-      0% { transform: translate(0,0); }
-      50% { transform: translate(-2%, 1%); }
-      100% { transform: translate(1%, -2%); }
-    }
-
-    .vignette {
-      position: fixed; inset: 0; z-index: 3; pointer-events: none;
-      background: radial-gradient(ellipse 80% 80% at 50% 50%, transparent 40%, rgba(0,0,0,0.75) 100%);
-    }
-
-    /* ---------- Curtain ---------- */
-    .curtain {
-      position: fixed; inset: 0; z-index: 40; display: flex; pointer-events: none;
-    }
-    .curtain__panel {
-      flex: 1; background: linear-gradient(180deg, #0b0a09, #050505);
-      position: relative;
-      transition: transform 1.6s var(--ease);
-    }
-    .curtain__panel::after {
-      content: ''; position: absolute; top: 0; bottom: 0; width: 1px;
-      background: linear-gradient(180deg, transparent, var(--gold), transparent);
-      opacity: 0.8;
-    }
-    .curtain__panel--left::after { right: 0; }
-    .curtain__panel--right::after { left: 0; }
-    .curtain__seal {
-      position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
-      width: 92px; height: 92px; border-radius: 50%;
-      border: 1px solid var(--gold-dim);
-      display: grid; place-items: center;
-      font-family: var(--serif); font-size: 40px; font-weight: 300; color: var(--gold);
-      letter-spacing: 0.05em;
-      animation: sealPulse 2.4s ease-in-out infinite;
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .curtain__seal::before {
-      content: ''; position: absolute; inset: -10px; border-radius: 50%;
-      border: 1px solid rgba(201,169,110,0.15);
-    }
-    @keyframes sealPulse {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(201,169,110,0.18); }
-      50% { box-shadow: 0 0 40px 6px rgba(201,169,110,0.10); }
-    }
-    body.revealed .curtain__panel--left  { transform: translateX(-100%); }
-    body.revealed .curtain__panel--right { transform: translateX(100%); }
-    body.revealed .curtain__seal { opacity: 0; transform: translate(-50%, -50%) scale(1.4); }
-
-    /* ---------- Frame ---------- */
-    .frame {
-      position: fixed; inset: 22px; z-index: 20; pointer-events: none;
-      border: 1px solid rgba(201,169,110,0.16);
-    }
-    .frame::before, .frame::after,
-    .frame span::before, .frame span::after {
-      content: ''; position: absolute; width: 18px; height: 18px;
-      border-color: var(--gold); border-style: solid; opacity: 0.85;
-    }
-    .frame::before { top: -1px; left: -1px; border-width: 1px 0 0 1px; }
-    .frame::after  { top: -1px; right: -1px; border-width: 1px 1px 0 0; }
-    .frame span::before { bottom: -1px; left: -1px; border-width: 0 0 1px 1px; }
-    .frame span::after  { bottom: -1px; right: -1px; border-width: 0 1px 1px 0; }
-
-    .corner-text {
-      position: fixed; z-index: 21; pointer-events: none;
-      font-family: var(--sans); font-size: 10px; letter-spacing: 0.38em;
-      text-transform: uppercase; color: var(--gold); opacity: 0.7;
-    }
-    .corner-text--tl { top: 34px; left: 40px; }
-    .corner-text--tr { top: 34px; right: 40px; }
-    .corner-text--bl { bottom: 34px; left: 40px; }
-    .corner-text--br { bottom: 34px; right: 40px; }
-    .corner-text--bl::before {
-      content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%;
-      background: var(--gold); margin-right: 10px; vertical-align: middle;
-      box-shadow: 0 0 8px var(--gold);
-      animation: blink 2.6s ease-in-out infinite;
-    }
-    @keyframes blink { 0%,100% { opacity: 1 } 50% { opacity: 0.25 } }
-
-    /* ---------- Stage ---------- */
-    .stage {
-      position: relative; z-index: 10;
+    main {
       min-height: 100svh;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      text-align: center; padding: 96px 24px 90px;
-      perspective: 1400px;
+      text-align: center; padding: 60px 24px;
     }
 
-    .reveal { opacity: 0; transform: translateY(26px); filter: blur(6px); }
-    body.revealed .reveal {
-      animation: rise 1.6s var(--ease) forwards;
-      animation-delay: calc(var(--d, 0) * 1ms + 900ms);
-    }
-    @keyframes rise {
-      to { opacity: 1; transform: translateY(0); filter: blur(0); }
-    }
+    .fade { opacity: 0; transform: translateY(14px); animation: fade 1.8s var(--ease) forwards; }
+    .fade:nth-child(2) { animation-delay: 0.3s; }
+    .fade:nth-child(3) { animation-delay: 0.6s; }
+    .fade:nth-child(4) { animation-delay: 0.9s; }
+    @keyframes fade { to { opacity: 1; transform: translateY(0); } }
 
-    .monogram-wrap {
-      position: relative; width: 190px; height: 190px; margin-bottom: 36px;
-      display: grid; place-items: center;
-      transform-style: preserve-3d;
-      transition: transform 0.35s var(--ease);
-      will-change: transform;
-    }
-    .monogram-ring {
-      position: absolute; inset: 0; border-radius: 50%;
-      animation: spin 40s linear infinite;
-    }
-    .monogram-ring text {
-      font-family: var(--sans); font-size: 6.6px; letter-spacing: 0.2em;
-      fill: var(--gold); text-transform: uppercase; opacity: 0.85;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .monogram {
-      width: 118px; height: 118px; border-radius: 50%;
-      border: 1px solid var(--gold-dim);
-      display: grid; place-items: center;
-      font-family: var(--serif); font-weight: 300; font-size: 66px; line-height: 1;
-      color: var(--gold-bright);
-      background:
-        radial-gradient(circle at 50% 30%, rgba(201,169,110,0.10), transparent 65%),
-        rgba(7,7,7,0.6);
-      box-shadow:
-        inset 0 0 40px rgba(201,169,110,0.06),
-        0 0 60px rgba(201,169,110,0.08);
-      position: relative;
-    }
-    .monogram::before {
-      content: ''; position: absolute; inset: 8px; border-radius: 50%;
-      border: 1px solid rgba(201,169,110,0.18);
-    }
-    .monogram::after {
-      content: ''; position: absolute; left: 50%; top: -18px; width: 1px; height: 18px;
-      background: linear-gradient(180deg, transparent, var(--gold));
-      opacity: 0;
-    }
-    .monogram span {
-      background: linear-gradient(180deg, #f2e2bf 0%, #c9a96e 55%, #8f7040 100%);
-      -webkit-background-clip: text; background-clip: text; color: transparent;
-      transform: translateY(2px);
-    }
-
-    .eyebrow {
-      font-size: 11px; letter-spacing: 0.5em; text-transform: uppercase;
-      color: var(--gold); opacity: 0.85;
-      display: flex; align-items: center; gap: 22px; margin-bottom: 30px;
-    }
-    .eyebrow::before, .eyebrow::after {
-      content: ''; width: 46px; height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold));
-    }
-    .eyebrow::after { background: linear-gradient(90deg, var(--gold), transparent); }
-
-    .wordmark {
+    h1 {
       font-family: var(--serif); font-weight: 300;
-      font-size: clamp(56px, 11vw, 150px);
-      line-height: 0.92; letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--ivory);
-      display: flex; justify-content: center; flex-wrap: wrap;
-    }
-    .wordmark .word { display: inline-flex; }
-    .wordmark .word + .word { margin-left: 0.3em; }
-    .wordmark .ch {
-      display: inline-block; opacity: 0; transform: translateY(0.4em) rotateX(-40deg);
-      transform-origin: bottom;
-      background: linear-gradient(180deg, #fbf5e8 0%, #efe4cc 45%, #c9b58d 100%);
+      font-size: clamp(44px, 9vw, 120px);
+      line-height: 1; letter-spacing: 0.08em; text-transform: uppercase;
+      background: linear-gradient(180deg, #fbf5e8 0%, #efe4cc 50%, #c9b58d 100%);
       -webkit-background-clip: text; background-clip: text; color: transparent;
     }
-    .wordmark .word:last-child .ch { font-style: italic; letter-spacing: 0.02em;
+    h1 em {
+      font-style: italic; letter-spacing: 0.03em;
       background: linear-gradient(180deg, #f0dcb0 0%, #c9a96e 55%, #9c7b4a 100%);
-      -webkit-background-clip: text; background-clip: text; }
-    body.revealed .wordmark .ch {
-      animation: letter 1.4s var(--ease) forwards;
-      animation-delay: calc(var(--i) * 55ms + 1200ms);
-    }
-    @keyframes letter {
-      to { opacity: 1; transform: translateY(0) rotateX(0); }
+      -webkit-background-clip: text; background-clip: text;
     }
 
     .rule {
-      width: 1px; height: 54px; margin: 34px auto 28px;
+      width: 1px; height: 48px; margin: 36px auto 30px;
       background: linear-gradient(180deg, transparent, var(--gold), transparent);
     }
 
-    .tagline {
-      font-family: var(--serif); font-weight: 300; font-style: italic;
-      font-size: clamp(20px, 2.6vw, 30px); line-height: 1.5;
-      color: var(--ivory-dim); max-width: 640px;
+    p.soon {
+      font-size: 12px; letter-spacing: 0.5em; text-transform: uppercase;
+      color: var(--gold);
+      padding-left: 0.5em;
     }
-    .tagline .flip {
-      display: inline-grid; vertical-align: bottom; height: 1.5em; overflow: hidden;
-      color: var(--gold-bright); font-style: italic; text-align: left;
-    }
-    .tagline .flip span {
-      grid-area: 1 / 1; display: block; opacity: 0;
-      transform: translateY(100%); transition: transform 0.9s var(--ease), opacity 0.6s ease;
-    }
-    .tagline .flip span.is-active { opacity: 1; transform: translateY(0); }
-    .tagline .flip span.is-leaving { opacity: 0; transform: translateY(-100%); }
 
-    .status {
-      margin-top: 34px; font-size: 11px; letter-spacing: 0.42em; text-transform: uppercase;
-      color: var(--gold); opacity: 0.75;
-    }
-    .status em { font-style: normal; color: var(--ivory-dim); letter-spacing: 0.42em; }
-
-    /* ---------- Invitation form ---------- */
-    .invite {
-      margin-top: 46px; width: min(520px, 100%);
-    }
-    .invite__label {
-      font-size: 10px; letter-spacing: 0.48em; text-transform: uppercase;
-      color: var(--gold); opacity: 0.8; margin-bottom: 22px;
-    }
-    .invite__form {
-      position: relative; display: flex; align-items: center;
-      border-bottom: 1px solid rgba(201,169,110,0.35);
+    .invite { margin-top: 56px; width: min(420px, 100%); }
+    .invite form {
+      display: flex; align-items: center;
+      border-bottom: 1px solid rgba(201, 169, 110, 0.35);
       transition: border-color 0.5s ease;
     }
-    .invite__form::after {
-      content: ''; position: absolute; left: 0; bottom: -1px; height: 1px; width: 0;
-      background: var(--gold-bright); transition: width 0.9s var(--ease);
-      box-shadow: 0 0 12px var(--gold);
+    .invite form:focus-within { border-color: var(--gold-bright); }
+    .invite input {
+      flex: 1; min-width: 0; background: transparent; border: 0; outline: 0;
+      padding: 14px 4px; color: var(--ivory);
+      font-family: var(--serif); font-size: 21px; font-weight: 300;
     }
-    .invite__form:focus-within::after { width: 100%; }
-    .invite__form input {
-      flex: 1; background: transparent; border: 0; outline: 0;
-      padding: 16px 4px; color: var(--ivory);
-      font-family: var(--serif); font-size: 22px; font-weight: 300; letter-spacing: 0.02em;
-      cursor: none;
-    }
-    @media (hover: none) { .invite__form input, .invite__form button { cursor: auto; } }
-    .invite__form input::placeholder { color: rgba(243,236,223,0.28); font-style: italic; }
-    .invite__form button {
-      background: transparent; border: 0; color: var(--gold);
+    .invite input::placeholder { color: rgba(243, 236, 223, 0.28); font-style: italic; }
+    .invite button {
+      background: transparent; border: 0; color: var(--gold); cursor: pointer;
       font-family: var(--sans); font-size: 11px; letter-spacing: 0.4em; text-transform: uppercase;
-      padding: 16px 0 16px 20px; cursor: none;
-      display: flex; align-items: center; gap: 14px; white-space: nowrap;
-      transition: color 0.4s ease, letter-spacing 0.6s var(--ease);
+      padding: 14px 0 14px 18px; transition: color 0.4s ease;
     }
-    .invite__form button:hover { color: var(--gold-bright); letter-spacing: 0.5em; }
-    .invite__form button svg { width: 34px; height: 10px; overflow: visible; }
-    .invite__form button svg line, .invite__form button svg polyline {
-      stroke: currentColor; stroke-width: 1; fill: none;
-      transition: transform 0.6s var(--ease);
+    .invite button:hover { color: var(--gold-bright); }
+    .invite .thanks {
+      display: none; padding: 14px 0;
+      font-family: var(--serif); font-style: italic; font-size: 21px; color: var(--gold-bright);
+      border-bottom: 1px solid rgba(201, 169, 110, 0.35);
     }
-    .invite__form button:hover svg { transform: translateX(6px); transition: transform 0.6s var(--ease); }
-    .invite__form.is-sending { border-color: rgba(201,169,110,0.15); }
-    .invite__form.is-sending button { pointer-events: none; opacity: 0.5; }
+    .invite.is-done form { display: none; }
+    .invite.is-done .thanks { display: block; animation: fade 1.2s var(--ease); }
 
-    .invite__thanks {
-      display: none; padding: 18px 0;
-      font-family: var(--serif); font-style: italic; font-size: 22px; color: var(--gold-bright);
-      border-bottom: 1px solid rgba(201,169,110,0.35);
-    }
-    .invite__thanks small {
-      display: block; font-family: var(--sans); font-style: normal; font-size: 10px;
-      letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); opacity: 0.8; margin-top: 10px;
-    }
-    .invite.is-done .invite__form { display: none; }
-    .invite.is-done .invite__thanks { display: block; animation: rise 1.2s var(--ease); }
-
-    .invite__note {
-      margin-top: 18px; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
-      color: rgba(243,236,223,0.3);
-    }
-
-    /* ---------- Cursor ---------- */
-    .cursor, .cursor-ring {
-      position: fixed; top: 0; left: 0; z-index: 50; pointer-events: none;
-      border-radius: 50%; transform: translate(-50%, -50%);
-    }
-    .cursor { width: 5px; height: 5px; background: var(--gold-bright);
-      box-shadow: 0 0 10px var(--gold); }
-    .cursor-ring { width: 34px; height: 34px; border: 1px solid rgba(201,169,110,0.55);
-      transition: width 0.4s var(--ease), height 0.4s var(--ease), border-color 0.4s ease; }
-    body.is-hovering .cursor-ring { width: 56px; height: 56px; border-color: var(--gold-bright); }
-
-    /* ---------- Responsive ---------- */
-    @media (max-width: 640px) {
-      .frame { inset: 14px; }
-      .corner-text { font-size: 8px; letter-spacing: 0.3em; }
-      .corner-text--tl, .corner-text--bl { left: 28px; }
-      .corner-text--tr, .corner-text--br { right: 28px; }
-      .corner-text--tl, .corner-text--tr { top: 24px; }
-      .corner-text--bl, .corner-text--br { bottom: 24px; }
-      .corner-text--tr, .corner-text--br { display: none; }
-      .stage { padding: 90px 22px; }
-      .monogram-wrap { width: 150px; height: 150px; margin-bottom: 34px; }
-      .monogram { width: 96px; height: 96px; font-size: 54px; }
-      .eyebrow { gap: 14px; letter-spacing: 0.4em; font-size: 10px; }
-      .eyebrow::before, .eyebrow::after { width: 28px; }
-      .wordmark { flex-direction: column; align-items: center; line-height: 1; }
-      .wordmark .word + .word { margin-left: 0; margin-top: 0.05em; }
-      .rule { height: 46px; margin: 30px auto 26px; }
-      .invite__form input { font-size: 18px; }
-      .invite__form button span { display: none; }
+    footer {
+      position: fixed; left: 0; right: 0; bottom: 28px;
+      text-align: center; font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase;
+      color: var(--ivory-dim); opacity: 0; animation: fade 1.8s var(--ease) 1.2s forwards;
     }
 
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
-      .reveal, .wordmark .ch { opacity: 1; transform: none; filter: none; }
-      .grain { animation: none; }
-      canvas#dust { display: none; }
+      .fade, footer { animation: none; opacity: 1; transform: none; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Atmosphere -->
-  <div class="atmosphere" aria-hidden="true">
-    <div class="aurora"><span></span><span></span><span></span></div>
-  </div>
-  <canvas id="dust" aria-hidden="true"></canvas>
-  <div class="spotlight" aria-hidden="true"></div>
-  <div class="vignette" aria-hidden="true"></div>
-  <div class="grain" aria-hidden="true"></div>
+  <main>
+    <h1 class="fade">Nuron <em>Studio</em></h1>
+    <div class="rule fade"></div>
+    <p class="soon fade">Coming Soon</p>
 
-  <!-- Curtain -->
-  <div class="curtain" aria-hidden="true">
-    <div class="curtain__panel curtain__panel--left"></div>
-    <div class="curtain__panel curtain__panel--right"></div>
-    <div class="curtain__seal">N</div>
-  </div>
-
-  <!-- Frame -->
-  <div class="frame" aria-hidden="true"><span></span></div>
-  <div class="corner-text corner-text--tl">Nuron Studio</div>
-  <div class="corner-text corner-text--tr">Est. MMXXVI</div>
-  <div class="corner-text corner-text--bl">In composition</div>
-  <div class="corner-text corner-text--br">nuronstudio.com</div>
-
-  <!-- Stage -->
-  <main class="stage">
-
-    <div class="monogram-wrap reveal" style="--d: 0" id="monogram">
-      <svg class="monogram-ring" viewBox="0 0 100 100" aria-hidden="true">
-        <defs>
-          <path id="ringPath" d="M50,50 m-42,0 a42,42 0 1,1 84,0 a42,42 0 1,1 -84,0" />
-        </defs>
-        <text textLength="262" lengthAdjust="spacing"><textPath href="#ringPath" startOffset="0" textLength="262" lengthAdjust="spacing">Nuron Studio &nbsp;•&nbsp; Coming Soon &nbsp;•&nbsp; Est. MMXXVI &nbsp;•&nbsp;</textPath></text>
-      </svg>
-      <div class="monogram"><span>N</span></div>
-    </div>
-
-    <div class="eyebrow reveal" style="--d: 150">Something exquisite is being composed</div>
-
-    <h1 class="wordmark" aria-label="Nuron Studio">
-      <span class="word" data-word="NURON"></span>
-      <span class="word" data-word="STUDIO"></span>
-    </h1>
-
-    <div class="rule reveal" style="--d: 900"></div>
-
-    <p class="tagline reveal" style="--d: 1050">
-      A house of considered
-      <span class="flip" id="flip" aria-live="polite">
-        <span class="is-active">design.</span>
-        <span>motion.</span>
-        <span>intelligence.</span>
-        <span>craft.</span>
-        <span>stories.</span>
-      </span>
-      <br />Arriving when it is ready. Not a moment before.
-    </p>
-
-    <div class="status reveal" style="--d: 1200">Doors open <em>—</em> 2026</div>
-
-    <section class="invite reveal" style="--d: 1400" id="invite">
-      <div class="invite__label">Request the first invitation</div>
-
-      <form class="invite__form" name="invitation" method="POST" action="/" data-netlify="true" data-netlify-honeypot="bot-field" id="inviteForm" novalidate>
+    <section class="invite fade" id="invite">
+      <form name="invitation" method="POST" action="/" data-netlify="true" data-netlify-honeypot="bot-field" id="inviteForm" novalidate>
         <input type="hidden" name="form-name" value="invitation" />
         <p style="display:none"><label>Leave empty: <input name="bot-field" /></label></p>
-        <input type="email" name="email" id="email" placeholder="your@address.com" autocomplete="email" required aria-label="Email address" />
-        <button type="submit" data-hover>
-          <span>Reserve</span>
-          <svg viewBox="0 0 34 10" aria-hidden="true"><line x1="0" y1="5" x2="32" y2="5" /><polyline points="27,1 32,5 27,9" /></svg>
-        </button>
+        <input type="email" name="email" placeholder="your@address.com" autocomplete="email" required aria-label="Email address" />
+        <button type="submit">Notify me</button>
       </form>
-
-      <div class="invite__thanks">
-        Your name is on the list.
-        <small>You will hear from us first</small>
-      </div>
-
-      <p class="invite__note">One email. No noise. Ever.</p>
+      <div class="thanks">Thank you. You will hear from us first.</div>
     </section>
-
   </main>
 
-  <div class="cursor" aria-hidden="true"></div>
-  <div class="cursor-ring" aria-hidden="true"></div>
+  <footer>nuronstudio.com</footer>
 
   <script>
     (function () {
-      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-      /* ---- Split wordmark into letters ---- */
-      let idx = 0;
-      document.querySelectorAll('.wordmark .word').forEach(word => {
-        const text = word.dataset.word;
-        [...text].forEach(ch => {
-          const s = document.createElement('span');
-          s.className = 'ch';
-          s.textContent = ch;
-          s.style.setProperty('--i', idx++);
-          word.appendChild(s);
-        });
-      });
-
-      /* ---- Curtain reveal ---- */
-      const reveal = () => document.body.classList.add('revealed');
-      if (document.fonts && document.fonts.ready) {
-        document.fonts.ready.then(() => setTimeout(reveal, 900));
-      } else {
-        setTimeout(reveal, 1200);
-      }
-      setTimeout(reveal, 3200); // safety net
-
-      /* ---- Rotating word ---- */
-      const flip = document.getElementById('flip');
-      if (flip) {
-        const items = [...flip.children];
-        let cur = 0;
-        setInterval(() => {
-          const prev = items[cur];
-          cur = (cur + 1) % items.length;
-          const next = items[cur];
-          prev.classList.remove('is-active'); prev.classList.add('is-leaving');
-          next.classList.remove('is-leaving'); next.classList.add('is-active');
-          setTimeout(() => prev.classList.remove('is-leaving'), 900);
-        }, 3200);
-      }
-
-      /* ---- Pointer: spotlight, cursor, monogram tilt ---- */
-      const cursor = document.querySelector('.cursor');
-      const ring = document.querySelector('.cursor-ring');
-      const spot = document.querySelector('.spotlight');
-      const mono = document.getElementById('monogram');
-      let mx = window.innerWidth / 2, my = window.innerHeight / 2;
-      let rx = mx, ry = my;
-
-      window.addEventListener('pointermove', e => {
-        mx = e.clientX; my = e.clientY;
-        spot.style.setProperty('--mx', mx + 'px');
-        spot.style.setProperty('--my', my + 'px');
-        if (cursor) cursor.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
-        if (mono && !reduced) {
-          const r = mono.getBoundingClientRect();
-          const dx = (mx - (r.left + r.width / 2)) / window.innerWidth;
-          const dy = (my - (r.top + r.height / 2)) / window.innerHeight;
-          mono.style.transform = `rotateY(${dx * 22}deg) rotateX(${-dy * 22}deg)`;
-        }
-      }, { passive: true });
-
-      (function followRing() {
-        rx += (mx - rx) * 0.14; ry += (my - ry) * 0.14;
-        if (ring) ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`;
-        requestAnimationFrame(followRing);
-      })();
-
-      document.querySelectorAll('[data-hover], input, button').forEach(el => {
-        el.addEventListener('pointerenter', () => document.body.classList.add('is-hovering'));
-        el.addEventListener('pointerleave', () => document.body.classList.remove('is-hovering'));
-      });
-
-      /* ---- Gold dust ---- */
-      const canvas = document.getElementById('dust');
-      if (canvas && !reduced) {
-        const ctx = canvas.getContext('2d');
-        let W, H, particles = [];
-        const DPR = Math.min(window.devicePixelRatio || 1, 2);
-
-        function resize() {
-          W = canvas.width = window.innerWidth * DPR;
-          H = canvas.height = window.innerHeight * DPR;
-          canvas.style.width = window.innerWidth + 'px';
-          canvas.style.height = window.innerHeight + 'px';
-          const count = Math.min(140, Math.floor((window.innerWidth * window.innerHeight) / 9000));
-          particles = Array.from({ length: count }, spawn);
-        }
-        function spawn() {
-          return {
-            x: Math.random() * W, y: Math.random() * H,
-            r: (Math.random() * 1.4 + 0.3) * DPR,
-            vx: (Math.random() - 0.5) * 0.12 * DPR,
-            vy: (-Math.random() * 0.18 - 0.04) * DPR,
-            a: Math.random() * Math.PI * 2,
-            tw: Math.random() * 0.02 + 0.005,
-            o: Math.random() * 0.6 + 0.2
-          };
-        }
-        function frame() {
-          ctx.clearRect(0, 0, W, H);
-          for (const p of particles) {
-            p.a += p.tw;
-            p.x += p.vx + Math.sin(p.a) * 0.08 * DPR;
-            p.y += p.vy;
-            if (p.y < -10 || p.x < -10 || p.x > W + 10) { Object.assign(p, spawn(), { y: H + 10 }); }
-            const alpha = p.o * (0.55 + 0.45 * Math.sin(p.a * 2));
-            const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 4);
-            g.addColorStop(0, `rgba(233,211,163,${alpha})`);
-            g.addColorStop(1, 'rgba(233,211,163,0)');
-            ctx.fillStyle = g;
-            ctx.beginPath(); ctx.arc(p.x, p.y, p.r * 4, 0, Math.PI * 2); ctx.fill();
-          }
-          requestAnimationFrame(frame);
-        }
-        resize();
-        window.addEventListener('resize', resize);
-        frame();
-      }
-
-      /* ---- Invitation form (Netlify Forms) ---- */
       const form = document.getElementById('inviteForm');
       const invite = document.getElementById('invite');
-      if (form) {
-        form.addEventListener('submit', e => {
-          e.preventDefault();
-          const email = form.email.value.trim();
-          if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-            form.email.focus();
-            form.animate([{ transform: 'translateX(0)' }, { transform: 'translateX(-6px)' }, { transform: 'translateX(6px)' }, { transform: 'translateX(0)' }], { duration: 320 });
-            return;
-          }
-          form.classList.add('is-sending');
-          const data = new FormData(form);
-          fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(data).toString() })
-            .catch(() => {})
-            .finally(() => { invite.classList.add('is-done'); });
-        });
-      }
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        const email = form.email.value.trim();
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { form.email.focus(); return; }
+        fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(new FormData(form)).toString()
+        }).catch(() => {}).finally(() => invite.classList.add('is-done'));
+      });
     })();
   </script>
 </body>
