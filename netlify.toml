@@ -7,3 +7,5 @@
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
+    # Allows only this page's own inline scripts; blocks the injected Netlify badge script.
+    Content-Security-Policy = "script-src 'sha256-oy8/Kj2c0mx3JW9KuXEDxqc0762+bHr7yxLz7xjT5qc=' 'sha256-lv4GGfuIlWVWuQ5Kt5k38tKFKFIqt6o5VbwySac/yNw='"
