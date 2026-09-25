@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Ccircle cx=%2732%27 cy=%2732%27 r=%2730%27 fill=%27%23070707%27 stroke=%27%23c9a96e%27 stroke-width=%271.5%27/%3E%3Ctext x=%2732%27 y=%2742%27 text-anchor=%27middle%27 font-family=%27Georgia,serif%27 font-size=%2730%27 fill=%27%23c9a96e%27%3EN%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@300;400&display=swap" rel="stylesheet" />
+  <title>Nuron Studio — Coming Soon (Split)</title>
+  <style>
+    :root { --ink:#070707; --paper:#f1ebe0; --gold:#c9a96e; --gold-deep:#9c7b4a; --ivory:#f3ecdf;
+      --serif:'Cormorant Garamond',Georgia,serif; --sans:'Jost',Helvetica,Arial,sans-serif; --ease:cubic-bezier(.19,1,.22,1); }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{font-family:var(--sans);font-weight:300;-webkit-font-smoothing:antialiased;background:var(--ink)}
+    .split{min-height:100svh;display:grid;grid-template-columns:1fr 1fr}
+    .panel{position:relative;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:60px 32px;min-height:50svh}
+    .dark{background:var(--ink);color:var(--ivory)}
+    .light{background:var(--paper);color:var(--ink)}
+    .word{font-family:var(--serif);font-weight:300;font-size:clamp(64px,11vw,180px);line-height:1;letter-spacing:.06em;text-transform:uppercase}
+    .dark .word{background:linear-gradient(180deg,#fbf5e8,#efe4cc 50%,#c9b58d);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .light .word{font-style:italic;letter-spacing:.02em;color:var(--ink)}
+    .label{position:absolute;left:0;right:0;bottom:36px;text-align:center;font-size:10px;letter-spacing:.5em;text-transform:uppercase;padding-left:.5em}
+    .dark .label{color:var(--gold)}.light .label{color:var(--gold-deep)}
+    .top{position:absolute;left:0;right:0;top:36px;text-align:center;font-size:10px;letter-spacing:.5em;text-transform:uppercase;padding-left:.5em;color:rgba(20,18,16,.45)}
+    .dark .top{color:rgba(243,236,223,.4)}
+    .fade{opacity:0;transform:translateY(12px);animation:fade 1.8s var(--ease) forwards}
+    .d1{animation-delay:.2s}.d2{animation-delay:.5s}.d3{animation-delay:.9s}
+    @keyframes fade{to{opacity:1;transform:none}}
+    .invite{margin-top:40px;width:min(360px,100%)}
+    .invite form{display:flex;align-items:center;border-bottom:1px solid rgba(20,18,16,.35);transition:border-color .5s}
+    .invite form:focus-within{border-color:var(--ink)}
+    .invite input{flex:1;min-width:0;background:transparent;border:0;outline:0;padding:14px 4px;color:var(--ink);font-family:var(--serif);font-size:21px;font-weight:300}
+    .invite input::placeholder{color:rgba(20,18,16,.3);font-style:italic}
+    .invite button{background:transparent;border:0;color:var(--gold-deep);cursor:pointer;font-family:var(--sans);font-size:11px;letter-spacing:.4em;text-transform:uppercase;padding:14px 0 14px 18px;transition:color .4s}
+    .invite button:hover{color:var(--ink)}
+    .invite .thanks{display:none;padding:14px 0;font-family:var(--serif);font-style:italic;font-size:21px;color:var(--gold-deep);border-bottom:1px solid rgba(20,18,16,.35)}
+    .invite.is-done form{display:none}.invite.is-done .thanks{display:block}
+    @media (max-width:760px){.split{grid-template-columns:1fr}.panel{padding:70px 24px}.label,.top{font-size:9px}}
+    @media (prefers-reduced-motion:reduce){.fade{animation:none;opacity:1;transform:none}}
+  </style>
+</head>
+<body>
+  <div class="split">
+    <section class="panel dark">
+      <div class="top">Est. MMXXVI</div>
+      <div class="word fade d1">Nuron</div>
+      <div class="label">Coming Soon</div>
+    </section>
+    <section class="panel light">
+      <div class="top">nuronstudio.com</div>
+      <div class="word fade d2">Studio</div>
+      <div class="fade d3"><section class="invite fade" id="invite">
+      <form name="invitation" method="POST" action="/" data-netlify="true" data-netlify-honeypot="bot-field" id="inviteForm" novalidate>
+        <input type="hidden" name="form-name" value="invitation" />
+        <p style="display:none"><label>Leave empty: <input name="bot-field" /></label></p>
+        <input type="email" name="email" placeholder="your@address.com" autocomplete="email" required aria-label="Email address" />
+        <button type="submit">Notify me</button>
+      </form>
+      <div class="thanks">Thank you. You will hear from us first.</div>
+    </section></div>
+      <div class="label">Opening 2026</div>
+    </section>
+  </div>
+  <script>
+    (function () {
+      const form = document.getElementById("inviteForm");
+      const invite = document.getElementById("invite");
+      form.addEventListener("submit", e => {
+        e.preventDefault();
+        const email = form.email.value.trim();
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { form.email.focus(); return; }
+        fetch("/", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams(new FormData(form)).toString() })
+          .catch(() => {}).finally(() => invite.classList.add("is-done"));
+      });
+    })();
+  </script>
+</body>
+</html>
